@@ -7,10 +7,10 @@ import (
 
 var db *gorm.DB
 
-func InitDatabases() error {
+func InitDatabases(dsn string) error {
 	// Just init default for now
 
-	newDb, err := gorm.Open(sqlite.Open("urns.db"), &gorm.Config{
+	newDb, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{
 		PrepareStmt: true,
 	})
 	if err != nil {
