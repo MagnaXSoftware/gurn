@@ -1,6 +1,9 @@
 # Databases
 *.db
 
+# Config files
+*.hcl
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
