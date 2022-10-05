@@ -14,6 +14,7 @@ import (
 func MountFuncs(group *gin.RouterGroup) {
 	group.GET("/stats/:urn", StatsByURN)
 	group.POST("/add")
+	group.GET("opensearch.xml", OpenSearch)
 	// group.GET("/add")
 }
 
@@ -32,4 +33,14 @@ func StatsByURN(c *gin.Context) {
 
 	message := fmt.Sprintf("Looking up stats for %s\n\nThere are %d entries for this key: \n\t%v", urnKey, len(accesses), string(p))
 	c.String(http.StatusOK, message)
+}
+
+func OpenSearch(c *gin.Context) {
+	desc := &OpenSearchDescription{
+		ShortCode:   "go",
+		Description: "URN service that provides static and easy shortcode for resources",
+		Self:        c.Request.RequestURI,
+	}
+
+	c.Render(http.StatusOK, desc)
 }
